@@ -22,7 +22,7 @@ const Navbar = async () => {
       <div className="flex h-16 items-center px-4">
         <StoreSwitcher items={stores} />
         <MainNav className="mx-2 md:mx-4 lg:mx-6" />
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-2 md:ml-auto flex items-center space-x-4">
           <UserButton afterSwitchSessionUrl="/" />
         </div>
       </div>

@@ -27,7 +27,6 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { StoreModal } from "./modals/store-modal";
 
 interface StoreSwircherProps extends PopoverTriggerProps {
   items: Store[];

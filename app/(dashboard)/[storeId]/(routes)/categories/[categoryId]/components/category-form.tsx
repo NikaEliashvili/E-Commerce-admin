@@ -62,7 +62,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
     ? "Edit a category"
     : "Add a new category";
   const toastMessage = initialData
-    ? `${initialData.name} updated.`
+    ? `Category updated.`
     : "Category created.";
   const action = initialData ? "Save changes" : "Create";
 
