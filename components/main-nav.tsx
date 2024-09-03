@@ -65,6 +65,11 @@ const MainNav = ({
       active: pathname.includes(`/${params.storeId}/colors`),
     },
     {
+      href: `/${params.storeId}/products`,
+      label: "products",
+      active: pathname.includes(`/${params.storeId}/products`),
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "settings",
       active: pathname === `/${params.storeId}/settings`,
