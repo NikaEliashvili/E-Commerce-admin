@@ -149,6 +149,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
                     <Input
                       disabled={loading}
                       placeholder="Color name"
+                      className="font-semibold text-primary"
                       {...field}
                     />
                   </FormControl>
@@ -161,7 +162,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
               name="value"
               render={({ field }) => (
                 <FormItem className="space-y-1 relative ">
-                  <FormLabel>Value</FormLabel>
+                  <FormLabel>Color</FormLabel>
                   <FormControl>
                     <Input
                       className="uppercase"
@@ -171,7 +172,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
                     />
                   </FormControl>
                   <div
-                    className="absolute right-1 size-8 border-2 bottom-1 p-0 overflow-hidden cursor-pointer  bg-transparent ring-offset-0 rounded-full flex items-center justify-center"
+                    className="absolute right-1 size-8 border-2 bottom-1 p-0 overflow-hidden cursor-pointer  bg-transparent ring-offset-0 rounded-md flex items-center justify-center "
                     style={{
                       backgroundColor: field.value,
                     }}
