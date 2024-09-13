@@ -233,7 +233,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
                       min={0}
                       disabled={loading}
                       placeholder="9.99"
+                      step={0.01}
                       {...field}
+
                     />
                   </FormControl>
                   <FormMessage className="text-xs" />
