@@ -1,3 +1,3 @@
-This is a Next.ts fullstack project.
+This is a Next.js fullstack project.
 
 E-Commerce with admin panel.
