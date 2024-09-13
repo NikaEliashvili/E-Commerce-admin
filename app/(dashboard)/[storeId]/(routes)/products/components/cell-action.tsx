@@ -13,12 +13,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: ProductColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -29,7 +29,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = () => {
     navigator.clipboard.writeText(data.id);
-    toast.success("Billboard ID copied to clipboard", {
+    toast.success("Product ID copied to clipboard", {
       position: "top-right",
     });
   };
@@ -38,15 +38,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/billboards/${data.id}`
+        `/api/${params.storeId}/products/${data.id}`
       );
       router.refresh();
-      toast.success("Billboard deleted!", { position: "top-right" });
+      toast.success("Product deleted!", { position: "top-right" });
     } catch (err) {
-      toast.error(
-        "Make sure you removed all categories using this Billboard first!",
-        { position: "top-right" }
-      );
+      toast.error("Something went wrong.", { position: "top-right" });
     } finally {
       setLoading(false);
       setOpen(false);
@@ -60,7 +57,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         loading={loading}
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
-        title={`Delete ${data.label}?`}
+        title={`Delete ${data.name}?`}
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -80,7 +77,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              router.push(`/${params.storeId}/billboards/${data.id}`);
+              router.push(`/${params.storeId}/products/${data.id}`);
             }}
           >
             <Edit className="mr-2 size-4" />

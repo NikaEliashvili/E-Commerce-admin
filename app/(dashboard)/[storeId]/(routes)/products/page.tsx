@@ -3,6 +3,13 @@ import prismadb from "@/lib/prismadb";
 import BillboardClient from "./components/client";
 import { ProductColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
+import {
+  Category,
+  Color,
+  Image,
+  Product,
+  Size,
+} from "@prisma/client";
 
 interface ProductsPageProps {
   params: {

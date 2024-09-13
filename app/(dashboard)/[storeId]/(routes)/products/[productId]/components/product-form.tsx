@@ -40,6 +40,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { formatter } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -93,7 +94,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       : {
           name: "",
           images: [],
-          price: 0,
+          price: parseFloat(String(0)),
           categoryId: "",
           colorId: "",
           sizeId: "",
@@ -133,10 +134,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products/`);
       toast.success("Product deleted!", { position: "top-right" });
     } catch (err) {
-      toast.error(
-        "Make sure you removed all categories using this Product first!",
-        { position: "top-right" }
-      );
+      toast.error("Something went wrong.", { position: "top-right" });
     } finally {
       setLoading(false);
       setOpen(false);
