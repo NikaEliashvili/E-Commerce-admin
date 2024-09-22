@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
           <IconButton
             ref={ref}
             className="shadow-none rounded-sm p-1"
-            icon={<RotateCw className="text-slate-500" />}
+            icon={<RotateCw className="text-slate-500 dark:text-slate-400" />}
             onClick={() => {
               console.log("Clicked");
               setIsLoading(true);

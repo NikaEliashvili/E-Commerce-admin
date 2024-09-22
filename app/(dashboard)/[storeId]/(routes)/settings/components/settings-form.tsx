@@ -37,9 +37,7 @@ const formSchema = z.object({
 
 type SettingsFormValues = z.infer<typeof formSchema>;
 
-const SettingsForm: React.FC<SettingsFormProps> = ({
-  initialData,
-}) => {
+const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const origin = useOrigin();
   const params = useParams();
   const router = useRouter();
@@ -72,10 +70,9 @@ const SettingsForm: React.FC<SettingsFormProps> = ({
       router.push("/");
       toast.success("Store deleted!", { position: "top-right" });
     } catch (err) {
-      toast.error(
-        "Make sure you removed all products and categories first!",
-        { position: "top-right" }
-      );
+      toast.error("Make sure you removed all products and categories first!", {
+        position: "top-right",
+      });
     } finally {
       setLoading(false);
       setOpen(false);
@@ -92,10 +89,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({
         title={`Delete ${initialData.name}?`}
       />
       <div className="flex items-center justify-between">
-        <Heading
-          title="Settings"
-          description="Manage store preferences"
-        />
+        <Heading title="Settings" description="Manage store preferences" />
         <CustomTooltip
           content={`Delete '${initialData.name.toLocaleUpperCase()}'`}
         >
@@ -106,6 +100,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({
             onClick={() => {
               setOpen(true);
             }}
+            className="dark:brightness-125"
           >
             <Trash className="h-4 w-4" />
           </Button>

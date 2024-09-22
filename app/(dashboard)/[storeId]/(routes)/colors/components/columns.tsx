@@ -23,7 +23,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
     cell: ({ row }) => (
       <CustomTooltip content="Copy">
         <div
-          className="flex items-center justify-between gap-x-4 cursor-pointer hover:bg-slate-100 py-2 px-1 rounded-md active:scale-95 uppercase font-semibold text-muted-foreground w-fit"
+          className="flex items-center justify-between gap-x-4 cursor-pointer hover:bg-slate-100 py-2 px-2 rounded-md active:scale-95 uppercase font-semibold text-muted-foreground w-fit dark:hover:bg-slate-800 transition"
           onClick={() => {
             navigator.clipboard.writeText(row.original.value);
             toast.success("Color copied.");

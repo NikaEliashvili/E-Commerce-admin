@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Copy, Server } from "lucide-react";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "./button";
@@ -22,10 +18,7 @@ const textMap: Record<ApiAlertProps["variant"], string> = {
   admin: "Admin",
 };
 
-const variantMap: Record<
-  ApiAlertProps["variant"],
-  BadgeProps["variant"]
-> = {
+const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
   public: "secondary",
   admin: "destructive",
 };
@@ -47,12 +40,10 @@ const ApiAlert: React.FC<ApiAlertProps> = ({
       <AlertTitle className="flex items-center gap-x-2">
         <Server className="size-4" />
         {title}
-        <Badge variant={variantMap[variant]}>
-          {textMap[variant]}
-        </Badge>
+        <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
       </AlertTitle>
       <AlertDescription className="mt-4 flex items-start justify-between gap-x-4">
-        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold ">
+        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold dark:bg-muted/30">
           {description}
         </code>
         <CustomTooltip content="Copy to Clipboard">
