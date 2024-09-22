@@ -14,9 +14,7 @@ interface BillboardClientProps {
   data: BillboardColumn[];
 }
 
-const BillboardClient: React.FC<BillboardClientProps> = ({
-  data = [],
-}) => {
+const BillboardClient: React.FC<BillboardClientProps> = ({ data = [] }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -28,9 +26,7 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
           description="Manage billboards for your store"
         />
         <Button
-          onClick={() =>
-            router.push(`/${params.storeId}/billboards/new`)
-          }
+          onClick={() => router.push(`/${params.storeId}/billboards/new`)}
         >
           <Plus className="size-4 mr-2" />
           Add New

@@ -9,8 +9,8 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { RotateCw } from "lucide-react";
-import { useState } from "react";
+import { LoaderCircle, RotateCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   Table,
@@ -23,11 +23,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import IconButton from "@/components/ui/icon-button";
+import CustomTooltip from "./custom-tooltip";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchKey: string;
+  isLoading?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -35,6 +39,9 @@ export function DataTable<TData, TValue>({
   data,
   searchKey,
 }: DataTableProps<TData, TValue>) {
+  const ref = useRef(null);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -49,6 +56,19 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  useEffect(() => {
+    if (data) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
+    }
+  }, [data, isLoading]);
+
   return (
     <div>
       <div className="flex items-center justify-between py-4">
@@ -61,13 +81,26 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
 
-        <IconButton
-          className="shadow-none border-none rounded-sm bg-slate-800 p-1"
-          icon={<RotateCw className="text-white" />}
-        />
+        <CustomTooltip content={`Refresh Content`}>
+          <IconButton
+            ref={ref}
+            className="shadow-none rounded-sm p-1"
+            icon={<RotateCw className="text-slate-500" />}
+            onClick={() => {
+              console.log("Clicked");
+              setIsLoading(true);
+              router.refresh();
+            }}
+          />
+        </CustomTooltip>
       </div>
-      <div className="rounded-md border">
-        <Table>
+      <div className={cn("relative rounded-md border")}>
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center z-50">
+            <LoaderCircle className="animate-spin inline-block size-10 text-slate-400 " />
+          </div>
+        )}
+        <Table className={cn(isLoading ? "opacity-35" : "")}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
