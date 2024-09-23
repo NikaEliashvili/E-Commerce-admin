@@ -77,14 +77,7 @@ export async function GET(
       },
     });
 
-    return NextResponse.json(categories, {
-      status: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
+    return NextResponse.json(categories);
   } catch (error) {
     console.log("[CATEGORIES_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
