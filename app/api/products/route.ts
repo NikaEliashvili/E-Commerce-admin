@@ -6,7 +6,17 @@ export async function GET(
   { params }: { params: { productId: string } }
 ) {
   try {
-    const product = await prismadb.product.findMany();
+    const product = await prismadb.product.findMany({
+      include: {
+        images: true,
+        category: true,
+        color: true,
+        size: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
     return NextResponse.json(product);
   } catch (error) {
