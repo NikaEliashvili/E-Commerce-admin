@@ -30,3 +30,23 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function GET(
+  req: Request,
+  { params }: { params: { storeId: string } }
+) {
+  try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const store = await prismadb.store.findMany();
+
+    return NextResponse.json(store);
+  } catch (error) {
+    console.log("[STORES_GET]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
