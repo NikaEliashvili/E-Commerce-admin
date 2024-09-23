@@ -3,10 +3,23 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: { storeId: string } }
 ) {
   try {
-    const product = await prismadb.product.findMany({
+    const { searchParams } = new URL(req.url);
+    const categoryId = searchParams.get("categoryId") || undefined;
+    const colorId = searchParams.get("colorId") || undefined;
+    const sizeId = searchParams.get("sizeId") || undefined;
+    const isFeatured = searchParams.get("isFeatured");
+
+    const products = await prismadb.product.findMany({
+      where: {
+        categoryId,
+        colorId,
+        sizeId,
+        isFeatured: isFeatured ? true : undefined,
+        isArchived: false,
+      },
       include: {
         images: true,
         category: true,
@@ -18,7 +31,7 @@ export async function GET(
       },
     });
 
-    return NextResponse.json(product);
+    return NextResponse.json(products);
   } catch (error) {
     console.log("[PRODUCTS_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
