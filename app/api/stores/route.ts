@@ -33,12 +33,6 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const { userId } = auth();
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     const store = await prismadb.store.findMany({
       include: {
         billboards: true,

@@ -7,12 +7,6 @@ export async function GET(
   { params }: { params: { productId: string } }
 ) {
   try {
-    const { userId } = auth();
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     const product = await prismadb.product.findMany();
 
     return NextResponse.json(product);
