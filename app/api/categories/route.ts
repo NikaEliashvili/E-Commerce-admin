@@ -3,9 +3,26 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
-    const product = await prismadb.category.findMany();
+    // const categories = await prismadb.category.findMany();
+    const groupedCategories = await prismadb.category.groupBy({
+      by: ["storeId"], // Group by storeId
+    });
 
-    return NextResponse.json(product);
+    // Fetch detailed categories for each storeId
+    const categoriesWithStores = await Promise.all(
+      groupedCategories.map(async (group) => {
+        const categories = await prismadb.category.findMany({
+          where: { storeId: group.storeId },
+          include: { store: true }, // Include store details
+        });
+        return {
+          storeId: group.storeId,
+          categories,
+        };
+      })
+    );
+
+    return NextResponse.json(categoriesWithStores);
   } catch (error) {
     console.log("[CATEGORIES_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
