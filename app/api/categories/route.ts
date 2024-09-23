@@ -22,7 +22,7 @@ export async function GET(req: Request) {
       })
     );
 
-    return NextResponse.json(categoriesWithStores);
+    return NextResponse.json(groupedCategories);
   } catch (error) {
     console.log("[CATEGORIES_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
