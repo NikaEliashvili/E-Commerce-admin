@@ -6,7 +6,7 @@ import prismadb from "@/lib/prismadb";
 
 // ✅ Set the exact origin that should access this route
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://ecommerce-store-nika.vercel.app",
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
   "Access-Control-Max-Age": "86400", // Optional: cache preflight response for 1 day
