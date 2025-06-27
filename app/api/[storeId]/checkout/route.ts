@@ -1,14 +1,11 @@
-import { create } from "zustand";
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
-import { date } from "zod";
-import { connect } from "http2";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://ecommerce-store-nika.vercel.app",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS,",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
@@ -29,11 +26,17 @@ export async function POST(
 ) {
   const { productIds, redirectUrl } = await req.json();
   if (!productIds || productIds.length === 0) {
-    return new NextResponse("Product Ids are required", { status: 400 });
+    return new NextResponse("Product Ids are required", {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   if (!redirectUrl) {
-    return new NextResponse("Redirect URL is required", { status: 400 });
+    return new NextResponse("Redirect URL is required", {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   const products = await prismadb.product.findMany({
